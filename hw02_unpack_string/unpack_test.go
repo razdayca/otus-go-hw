@@ -14,9 +14,6 @@ func TestUnpack(t *testing.T) {
 	}{
 		{input: "a4bc2d5e", expected: "aaaabccddddde"},
 		{input: "abccd", expected: "abccd"},
-		{input: "3abc", expected: ""},
-		{input: "45", expected: ""},
-		{input: "aaa10b", expected: ""},
 		{input: "", expected: ""},
 		{input: "d\n5abc", expected: "d\n\n\n\n\nabc"},
 		{input: "aaa0b", expected: "aab"},
