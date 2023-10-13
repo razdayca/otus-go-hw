@@ -13,7 +13,8 @@ func Unpack(unpackStr string) (string, error) {
 	var final strings.Builder
 	final.Grow(32)
 	for i, symbol := range []rune(unpackStr) {
-		if unicode.IsDigit(symbol) && !unicode.IsDigit([]rune(unpackStr)[i+1]) {
+		switch {
+		case unicode.IsDigit(symbol) && !unicode.IsDigit([]rune(unpackStr)[i+1]):
 			count, _ := strconv.Atoi(string(symbol))
 			switch {
 			case count > 0 && i > 0:
@@ -25,9 +26,9 @@ func Unpack(unpackStr string) (string, error) {
 			default:
 				return "", ErrInvalidString
 			}
-		} else if unicode.IsDigit(symbol) && unicode.IsDigit([]rune(unpackStr)[i+1]) {
+		case unicode.IsDigit(symbol) && unicode.IsDigit([]rune(unpackStr)[i+1]):
 			return "", ErrInvalidString
-		} else {
+		default:
 			final.WriteString(string(symbol))
 		}
 	}
