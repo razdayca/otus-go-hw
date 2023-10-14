@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-func Top10(text string) []string {
-	if text != "" {
+func Top10(text string) []string { //nolint:gocognit
+	if len(text) > 0 {
 		counter := map[string]int{}
 		splitText := strings.Fields(text)
 		for _, val := range splitText {
@@ -16,7 +16,6 @@ func Top10(text string) []string {
 			} else {
 				counter[val] = 1
 			}
-
 		}
 		test := map[int][]string{}
 		for i := 0; i < 10; i++ {
