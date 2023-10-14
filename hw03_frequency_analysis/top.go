@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func Top10(text string) []string { //nolint:gocognit
+func Top10(text string) []string {
 	if len(text) == 0 {
 		return nil
 	}
@@ -19,7 +19,7 @@ func Top10(text string) []string { //nolint:gocognit
 			counter[val] = 1
 		}
 	}
-	test := map[int][]string{}
+	intervalMap := map[int][]string{}
 	for i := 0; i < 10; i++ {
 		var largestValue int
 		var largestkey string
@@ -33,22 +33,22 @@ func Top10(text string) []string { //nolint:gocognit
 		}
 		for key, val := range counter {
 			if largestkey == key {
-				test[val] = append(test[val], key)
-				sort.Strings(test[val])
+				intervalMap[val] = append(intervalMap[val], key)
+				sort.Strings(intervalMap[val])
 			}
 		}
 		delete(counter, largestkey)
 	}
 	values := make([]string, 0, 10)
-	for len(test) > 0 {
+	for len(intervalMap) > 0 {
 		var largestkey int
-		for key := range test {
+		for key := range intervalMap {
 			if key > largestkey {
 				largestkey = key
 			}
 		}
-		values = append(values, test[largestkey]...)
-		delete(test, largestkey)
+		values = append(values, intervalMap[largestkey]...)
+		delete(intervalMap, largestkey)
 	}
 	return values
 }
