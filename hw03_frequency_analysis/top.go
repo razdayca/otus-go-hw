@@ -51,5 +51,4 @@ func Top10(text string) []string { //nolint:gocognit
 		delete(test, largestkey)
 	}
 	return values
-
 }
