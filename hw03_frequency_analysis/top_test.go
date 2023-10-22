@@ -82,7 +82,7 @@ func TestTop10(t *testing.T) {
 }
 
 func TestTop10InEmojis(t *testing.T) {
-	var got = "😀 😀 😀 😀 😀 😁 😁 😁 💩 💩 💩 💩 😜 😜 😜 😜"
+	got := "😀 😀 😀 😀 😀 😁 😁 😁 💩 💩 💩 💩 😜 😜 😜 😜"
 	t.Run("emoji test", func(t *testing.T) {
 		wont := []string{
 			"😀", // 5
@@ -95,7 +95,7 @@ func TestTop10InEmojis(t *testing.T) {
 }
 
 func TestTop10InChinese(t *testing.T) {
-	var got = "汉 汉 汉 漢 字 字 字 字 字 字"
+	got := "汉 汉 汉 漢 字 字 字 字 字 字"
 	t.Run("chinese test", func(t *testing.T) {
 		wont := []string{
 			"字", // 6
