@@ -32,11 +32,12 @@ func (l *list) MoveToFront(i *ListItem) {
 }
 
 func (l *list) Remove(i *ListItem) {
-	if i.Prev == nil {
+	switch {
+	case i.Prev == nil:
 		node := l.first
 		l.first = node.Next
 		l.len--
-	} else if i.Next == nil {
+	case i.Next == nil:
 		node1 := l.first
 		var node2 *ListItem
 		for node1.Next != nil {
@@ -45,7 +46,7 @@ func (l *list) Remove(i *ListItem) {
 		}
 		node2.Next = nil
 		l.len--
-	} else {
+	default:
 		node1 := l.first
 		for i := 0; i < l.len-1; i++ {
 			node1 = node1.Next
