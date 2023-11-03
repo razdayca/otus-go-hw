@@ -40,6 +40,7 @@ func (c lruCache) Set(key Key, value interface{}) bool {
 
 	return false
 }
+
 func (c lruCache) Get(key Key) (interface{}, bool) {
 	val, ok := c.items[key]
 	if ok {
@@ -49,6 +50,7 @@ func (c lruCache) Get(key Key) (interface{}, bool) {
 	}
 	return nil, false
 }
+
 func (c lruCache) Clear() {
 	c.queue = nil
 	c.items = nil

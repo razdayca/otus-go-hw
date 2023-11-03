@@ -82,16 +82,16 @@ func (l *list) PushFront(v interface{}) *ListItem {
 		l.last = &s
 		l.len++
 		return &s
-	} else {
-		s := ListItem{
-			Value: v,
-			Next:  l.first,
-		}
-		l.first.Prev = &s
-		l.first = &s
-		l.len++
-		return &s
 	}
+
+	s := ListItem{
+		Value: v,
+		Next:  l.first,
+	}
+	l.first.Prev = &s
+	l.first = &s
+	l.len++
+	return &s
 }
 
 func (l list) Back() *ListItem {
