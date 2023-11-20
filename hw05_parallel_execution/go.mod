@@ -1,4 +1,4 @@
-module github.com/razdayca/hw05_parallel_execution
+module github.com/razdayca/otus-go-hw/hw05_parallel_execution
 
 go 1.19
 

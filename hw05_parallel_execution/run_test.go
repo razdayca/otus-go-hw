@@ -87,6 +87,28 @@ func TestRun(t *testing.T) {
 		maxErrorsCount := 0
 		err := Run(tasks, workersCount, maxErrorsCount)
 
-		require.True(t, errors.Is(err, ErrErrorsLimitExceeded), "actual err - %v", err)
+		require.ErrorIs(t, err, ErrErrorsLimitExceeded, "execution must be aborted immediately")
+	})
+
+	t.Run("were N equal to 0", func(t *testing.T) {
+		tasksCount := 50
+		tasks := make([]Task, 0, tasksCount)
+
+		var runTasksCount int32
+
+		for i := 0; i < tasksCount; i++ {
+			err := fmt.Errorf("error from task %d", i)
+			tasks = append(tasks, func() error {
+				time.Sleep(time.Millisecond * time.Duration(rand.Intn(100)))
+				atomic.AddInt32(&runTasksCount, 1)
+				return err
+			})
+		}
+
+		workersCount := 0
+		maxErrorsCount := 10
+		err := Run(tasks, workersCount, maxErrorsCount)
+
+		require.Error(t, err, "the count of workers is less than or equal to zero")
 	})
 }
