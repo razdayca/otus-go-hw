@@ -47,7 +47,7 @@ func Copy(fromPath, toPath string, offset, limit int64) error {
 		}
 	}
 
-	if limit > int64(0) {
+	if limit > 0 {
 		if _, err := io.CopyN(fileToCopy, barReader, limit); err != nil {
 			if err == io.EOF {
 				fileToCopy.Sync()
@@ -56,12 +56,12 @@ func Copy(fromPath, toPath string, offset, limit int64) error {
 			return err
 		}
 		fileToCopy.Sync()
-		return nil
 	} else {
 		if _, err := io.Copy(fileToCopy, barReader); err != nil {
 			return err
 		}
 		fileToCopy.Sync()
-		return nil
+
 	}
+	return nil
 }
