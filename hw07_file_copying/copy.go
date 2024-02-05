@@ -2,9 +2,10 @@ package main
 
 import (
 	"errors"
-	"github.com/cheggaaa/pb/v3"
 	"io"
 	"os"
+
+	"github.com/cheggaaa/pb/v3"
 )
 
 var (
@@ -47,21 +48,29 @@ func Copy(fromPath, toPath string, offset, limit int64) error {
 		}
 	}
 
-	if limit > 0 {
-		if _, err := io.CopyN(fileToCopy, barReader, limit); err != nil {
-			if err == io.EOF {
-				fileToCopy.Sync()
-				return nil
-			}
-			return err
-		}
-		fileToCopy.Sync()
-	} else {
+	if limit == 0 {
 		if _, err := io.Copy(fileToCopy, barReader); err != nil {
 			return err
 		}
-		fileToCopy.Sync()
-
+		err := fileToCopy.Sync()
+		if err != nil {
+			return err
+		}
 	}
+	if _, err := io.CopyN(fileToCopy, barReader, limit); err != nil {
+		if errors.Is(err, io.EOF) {
+			err := fileToCopy.Sync()
+			if err != nil {
+				return err
+			}
+			return nil
+		}
+		return err
+	}
+	err = fileToCopy.Sync()
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
