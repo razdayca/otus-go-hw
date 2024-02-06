@@ -44,7 +44,7 @@ func ReadDir(dir string) (Environment, error) {
 		line, _, err := reader.ReadLine()
 		if err != nil {
 			openedFile.Close()
-			if err == io.EOF {
+			if errors.Is(err, io.EOF) {
 				fmt.Println("file is empty")
 			}
 		}

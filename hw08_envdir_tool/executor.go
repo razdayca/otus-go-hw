@@ -21,14 +21,14 @@ func RunCmd(cmd []string, env Environment) (returnCode int) {
 		}
 	}
 
-	c := exec.Command(cmd[0], cmd[1:]...)
+	c := exec.Command(cmd[0], cmd[1:]...) //nolint:gosec
 	c.Stderr = os.Stderr
 	c.Stdout = os.Stdout
 	c.Stdin = os.Stdin
 	c.Env = os.Environ()
 	if err := c.Run(); err != nil {
 		var er exec.ExitError
-		if err == &er {
+		if errors.Is(err, &er) {
 			return er.ExitCode()
 		}
 		return 1
