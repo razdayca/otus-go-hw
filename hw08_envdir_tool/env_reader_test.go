@@ -10,7 +10,7 @@ import (
 func TestReadDir(t *testing.T) {
 	t.Run("test is valid", func(t *testing.T) {
 		expectedEnv := Environment{
-			"ADDED": EnvValue{Value: "added env", NeedRemove: false},
+			"ADDED": EnvValue{Value: "from original env", NeedRemove: false},
 			"BAR":   EnvValue{Value: "bar", NeedRemove: false},
 			"FOO":   EnvValue{Value: "   foo\nwith new line", NeedRemove: false},
 			"HELLO": EnvValue{Value: "\"hello\"", NeedRemove: false},
