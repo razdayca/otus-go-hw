@@ -15,7 +15,7 @@ func main() {
 	d := os.Args[1]
 	env, err := ReadDir(d)
 	if err != nil {
-		fmt.Println(errors.Join(err, errors.New("can't get environment variables from dir")))
+		fmt.Println(err, errors.New("can't get environment variables from dir"))
 		os.Exit(1)
 	}
 

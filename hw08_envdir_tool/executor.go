@@ -16,7 +16,7 @@ func RunCmd(cmd []string, env Environment) (returnCode int) {
 	for key, val := range env {
 		err := os.Setenv(key, val.Value)
 		if err != nil {
-			fmt.Println(errors.Join(err, errors.New("can't get environment variables from dir")))
+			fmt.Println(err, errors.New("can't get environment variables from dir"))
 			return 1
 		}
 	}
