@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 )
@@ -15,7 +14,7 @@ func main() {
 	d := os.Args[1]
 	env, err := ReadDir(d)
 	if err != nil {
-		fmt.Println(err, errors.New("can't get environment variables from dir"))
+		fmt.Println(err)
 		os.Exit(1)
 	}
 
