@@ -1,6 +1,6 @@
 module github.com/razdayca/otus-go-hw/hw07_file_copying
 
-go 1.21.2
+go 1.20
 
 require (
 	github.com/cheggaaa/pb/v3 v3.1.5
